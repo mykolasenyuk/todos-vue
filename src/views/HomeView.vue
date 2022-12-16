@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Wellcome to Todos application</h2>
-    <a href="/todos"></a>
+    <h2>Welcome to Todos application</h2>
+    <router-link to="/todos">Start</router-link >
   </div>
 </template>

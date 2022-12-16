@@ -10,7 +10,7 @@
     </select>
     <hr />
     <Loader v-if="loading"/>
-    <TodoList v-bind:todos="todos"
+    <TodoList v-bind:todos="filteredTodos"
               @dlt-todo="dltTodo"
               v-else-if="filteredTodos.length"
     />
@@ -22,29 +22,27 @@
 import TodoList from '@/components/TodoList'
 import AddTodo from '@/components/AddTodo'
 import Loader from '@/components/Loader'
+import data from '../data.json'
 
 export default {
   name: 'App',
   data() {
     return {
-      loading:true,
       todos: [],
+      loading:true,
       filter: 'all'
     }
   },
   mounted() {
     setTimeout(()=>{
-      this.todos=[
-        { id: 1, title: 'buy water', done: false },
-        { id: 2, title: 'take shower', done: false },
-        { id: 3, title: 'drink tea', done: false },
-      ]
+      this.todos=data
       this.loading=false
     },1000)
   },
   computed:{
     filteredTodos(){
       if (this.filter==='done'){
+        console.log(this.todos.filter(t=>t.done))
         return this.todos.filter(t=>t.done)
       }
       if (this.filter==='all'){

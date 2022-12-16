@@ -1,7 +1,7 @@
 <template>
   <li>
     <span v-bind:class="{ done: todo.done }">
-      <input type="checkbox" v-on:change="todo.done = !todo.done" />
+      <input type="checkbox"  v-bind:checked="todo.done" v-on:change="todo.done = !todo.done" />
       <strong>{{ index + 1 }}</strong>
       {{ todo.title.toUpperCase()}}
     </span>
@@ -17,6 +17,7 @@ export default {
       required: true,
     },
     index: Number,
+
   }
 
 }

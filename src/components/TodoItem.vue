@@ -3,7 +3,7 @@
     <span v-bind:class="{ done: todo.done }">
       <input type="checkbox" v-on:change="todo.done = !todo.done" />
       <strong>{{ index + 1 }}</strong>
-      {{ todo.title }}
+      {{ todo.title.toUpperCase()}}
     </span>
     <button class="btn" v-on:click="$emit('dlt-todo', todo.id)">&times</button>
   </li>
@@ -17,7 +17,8 @@ export default {
       required: true,
     },
     index: Number,
-  },
+  }
+
 }
 </script>
 <style scoped>

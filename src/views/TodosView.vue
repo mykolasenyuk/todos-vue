@@ -2,11 +2,17 @@
   <div>
     <h2>Todos List</h2>
     <AddTodo @add-todo="addTodo" />
+    <select v-model="filter" >
+      <option value="all">All</option>
+      <option value="done">Done</option>
+      <option value="ready">Ready to</option>
+
+    </select>
     <hr />
     <Loader v-if="loading"/>
     <TodoList v-bind:todos="todos"
               @dlt-todo="dltTodo"
-              v-else-if="todos.length"
+              v-else-if="filteredTodos.length"
     />
     <p v-else>Empty list</p>
   </div>
@@ -23,6 +29,7 @@ export default {
     return {
       loading:true,
       todos: [],
+      filter: 'all'
     }
   },
   mounted() {
@@ -33,7 +40,26 @@ export default {
         { id: 3, title: 'drink tea', done: false },
       ]
       this.loading=false
-    },1500)
+    },1000)
+  },
+  computed:{
+    filteredTodos(){
+      if (this.filter==='done'){
+        return this.todos.filter(t=>t.done)
+      }
+      if (this.filter==='all'){
+        return this.todos
+      }
+
+      if (this.filter==='ready'){
+        return this.todos.filter(t=>!t.done)
+      }
+    }
+  },
+  watch:{
+    filter(value){
+      console.log(value)
+    }
   },
   methods: {
     dltTodo(id) {
